@@ -119,7 +119,7 @@ const Hero = () => {
           {[
             { value: "30+", label: "Protocols" },
             { value: "14+", label: "Manufacturers" },
-            { value: "MIT", label: "License" },
+            { value: "GPL", label: "License" },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
