@@ -77,7 +77,7 @@ const AnnouncePopup = () => {
                       <span className="text-foreground font-medium">Do not trust them.</span> Only download ARF firmware from this site or our official GitHub repository.
                     </p>
                     <p className="text-muted-foreground leading-relaxed">
-                      Any rumors, forks or websites claiming to be ARF are unauthorized and potentially dangerous. When in doubt, verify the source on our Discord.
+                      Any rumors or websites claiming to be ARF are unauthorized and potentially dangerous. When in doubt, verify the source on our Discord.
                     </p>
                   </div>
                 </div>
