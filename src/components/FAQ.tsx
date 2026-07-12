@@ -6,7 +6,7 @@ import { ChevronDown, Scale } from "lucide-react";
 const faqs = [
   {
     q: "Is this legal to use?",
-    a: "ARF Firmware is developed strictly for educational and academic security research purposes. Using it to interact with vehicles or systems you do not own or have explicit written permission to test is illegal in most jurisdictions. The authors and contributors accept no responsibility for misuse. By using this firmware, you agree to comply with all applicable laws. Think of it like a lockpick set — legal to own for legitimate purposes, illegal to use on someone else's lock.",
+    a: "ARF Firmware is developed strictly for educational and academic security research purposes. Using it to interact with vehicles or systems you do not own or have explicit written permission to test is illegal in most jurisdictions. The authors and contributors accept no responsibility for misuse. By using this firmware, you agree to comply with all applicable laws. Think of it like a lockpick set - legal to own for legitimate purposes, illegal to use on someone else's lock.",
     highlight: true,
   },
   {
@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     q: "What's the difference between ARF and Unleashed / RogueMaster?",
-    a: "ARF is specifically designed around automotive and gate protocols — it's not a general-purpose everything fork. The focus is correctness, protocol accuracy, and research-grade tooling (KeeLoq brute force, PSA XTEA decrypt, modulation hopping). Unleashed is great for general use; ARF is for serious Sub-GHz research.",
+    a: "ARF is specifically designed around automotive Sub-GHz research and the enabled firmware protocol registry - it is not a general-purpose everything fork. The focus is correctness, protocol accuracy, and research-grade tooling (KeeLoq brute force, PSA XTEA decrypt, modulation hopping). Unleashed is great for general use; ARF is for serious Sub-GHz research.",
   },
   {
     q: "Which Flipper Zero model is supported?",
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: "Can I go back to official firmware?",
-    a: "Absolutely. Download qFlipper on your computer or use the official Flipper mobile app. Connect your device and click Update Firmware — it will flash the official release. You can switch between firmwares as many times as you want.",
+    a: "Absolutely. Download qFlipper on your computer or use the official Flipper mobile app. Connect your device and click Update Firmware - it will flash the official release. You can switch between firmwares as many times as you want.",
   },
   {
     q: "Does ARF work with the Flipper Android / iOS app?",

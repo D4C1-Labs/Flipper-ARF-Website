@@ -16,7 +16,7 @@ const features = [
   {
     icon: Car,
     title: "Automotive Protocols",
-    description: "Full support for VAG, PSA, Fiat, Ford, Kia/Hyundai, Subaru, Mazda, Suzuki, Mitsubishi and more automotive remote protocols.",
+    description: "Active support for VAG, PSA, Fiat, Ford V0-V3, Kia/Hyundai V0-V7, Subaru, Mazda, Suzuki, Mitsubishi, Chrysler, Land Rover and more.",
   },
   {
     icon: Radio,
@@ -35,13 +35,13 @@ const features = [
   },
   {
     icon: Lock,
-    title: "Gate Protocols",
-    description: "Nice FLO, CAME, Faac SLH, Somfy, Hormann, Marantec, Beninca, Alutech and many more gate/access protocols.",
+    title: "Registry-Accurate List",
+    description: "The compatibility table reflects the enabled firmware registry, including KeeLoq, RAW, BinRAW, and the newest automotive additions.",
   },
   {
     icon: Settings,
     title: "Modular Design",
-    description: "Clean protocol implementation with modular expansion. Stability over feature bloat — automotive-focused by design.",
+    description: "Clean protocol implementation with modular expansion. Stability over feature bloat - automotive-focused by design.",
   },
   {
     icon: Wifi,
@@ -72,7 +72,7 @@ const Features = () => {
             Automotive Research Firmware
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Protocol-focused firmware for Flipper Zero — maximum compatibility with automotive Sub-GHz rolling and static protocols.
+            Protocol-focused firmware for Flipper Zero - maximum compatibility with automotive Sub-GHz rolling and static protocols.
           </p>
         </AnimatedSection>
 

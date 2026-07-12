@@ -117,8 +117,8 @@ const Hero = () => {
           className="mt-16 flex items-center justify-center gap-8 md:gap-12 text-sm"
         >
           {[
-            { value: "30+", label: "Protocols" },
-            { value: "14+", label: "Manufacturers" },
+            { value: "29", label: "Protocols" },
+            { value: "18+", label: "Manufacturers" },
             { value: "GPL", label: "License" },
           ].map((stat, i) => (
             <motion.div

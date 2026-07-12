@@ -1,44 +1,56 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { ChevronDown, Check, Car, DoorOpen, Radio } from "lucide-react";
+import { ChevronDown, Check, Car, Radio } from "lucide-react";
 
 type Protocol = {
   manufacturer: string;
   protocol: string;
   frequency: string;
   modulation: string;
+  type: string;
   encoder: boolean;
   decoder: boolean;
-  crc: boolean;
 };
 
 const automotiveProtocols: Protocol[] = [
-  { manufacturer: "VAG (VW/Audi/Skoda/Seat)", protocol: "VAG GROUP", frequency: "433 MHz", modulation: "AM", encoder: true, decoder: true, crc: false },
-  { manufacturer: "Porsche", protocol: "Cayenne", frequency: "433/868 MHz", modulation: "AM", encoder: true, decoder: true, crc: false },
-  { manufacturer: "PSA (Peugeot/Citroën/DS)", protocol: "PSA GROUP", frequency: "433 MHz", modulation: "AM/FM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "Ford", protocol: "Ford V0", frequency: "315/433 MHz", modulation: "AM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "Fiat", protocol: "Fiat SpA", frequency: "433 MHz", modulation: "AM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "Subaru", protocol: "Subaru", frequency: "433 MHz", modulation: "AM", encoder: true, decoder: true, crc: false },
-  { manufacturer: "Mazda", protocol: "Siemens 5WK49365D", frequency: "315/433 MHz", modulation: "FM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "Kia/Hyundai", protocol: "Kia V0–V6", frequency: "315/433 MHz", modulation: "AM/FM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "Suzuki", protocol: "Suzuki", frequency: "433 MHz", modulation: "FM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "Mitsubishi", protocol: "Mitsubishi V0", frequency: "868 MHz", modulation: "FM", encoder: true, decoder: true, crc: false },
+  { manufacturer: "VAG (VW/Audi/Skoda/Seat)", protocol: "VAG GROUP", frequency: "433 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Porsche", protocol: "Porsche AG", frequency: "433/868 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Ford", protocol: "FORD V0", frequency: "315/433 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Ford", protocol: "Ford V1", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Ford", protocol: "Ford V2", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Ford", protocol: "Ford V3", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "PSA (Peugeot/Citroen/DS)", protocol: "PSA GROUP", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Fiat", protocol: "FIAT SPA", frequency: "433 MHz", modulation: "AM", type: "Static", encoder: true, decoder: true },
+  { manufacturer: "Marelli", protocol: "MARELLI", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Subaru", protocol: "SUBARU", frequency: "315/433 MHz", modulation: "AM/FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Mazda", protocol: "MazdaSiemens", frequency: "433 MHz", modulation: "FM", type: "Static", encoder: true, decoder: true },
+  { manufacturer: "Mazda", protocol: "Mazda V0", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Kia/Hyundai", protocol: "KIA/HYU V0", frequency: "315/433 MHz", modulation: "AM/FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Kia/Hyundai", protocol: "KIA/HYU V1", frequency: "315/433 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Kia/Hyundai", protocol: "KIA/HYU V2", frequency: "315/433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Kia/Hyundai", protocol: "KIA/HYU V3/V4", frequency: "315/433 MHz", modulation: "AM/FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Kia/Hyundai", protocol: "KIA/HYU V5", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Kia/Hyundai", protocol: "KIA/HYU V6", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Kia/Hyundai", protocol: "Kia V7", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Suzuki", protocol: "SUZUKI", frequency: "315/433 MHz", modulation: "AM/FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Mitsubishi", protocol: "Mitsubishi V0", frequency: "868 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "StarLine", protocol: "Star Line", frequency: "433 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Scher-Khan", protocol: "Scher-Khan", frequency: "433 MHz", modulation: "AM/FM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Sheriff", protocol: "Sheriff CFM", frequency: "433 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Chrysler", protocol: "Chrysler", frequency: "315/433 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Land Rover", protocol: "Land Rover V0", frequency: "433 MHz", modulation: "FM", type: "Dynamic", encoder: true, decoder: true },
 ];
 
-const gateProtocols: Protocol[] = [
-  { manufacturer: "KeeLoq", protocol: "KeeLoq", frequency: "433/868/315 MHz", modulation: "AM", encoder: true, decoder: true, crc: false },
-  { manufacturer: "Nice", protocol: "Nice FLO / FloR-S", frequency: "433 MHz", modulation: "AM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "CAME", protocol: "CAME / TWEE / Atomo", frequency: "433/315 MHz", modulation: "AM", encoder: true, decoder: true, crc: false },
-  { manufacturer: "Faac", protocol: "Faac SLH", frequency: "433/868 MHz", modulation: "AM", encoder: true, decoder: true, crc: false },
-  { manufacturer: "Somfy", protocol: "Telis / Keytis", frequency: "433 MHz", modulation: "AM", encoder: true, decoder: true, crc: true },
-  { manufacturer: "Hormann", protocol: "HSM", frequency: "433/868 MHz", modulation: "AM", encoder: true, decoder: true, crc: false },
-  { manufacturer: "Marantec", protocol: "Marantec / Marantec24", frequency: "433 MHz", modulation: "AM", encoder: true, decoder: true, crc: true },
+const coreProtocols: Protocol[] = [
+  { manufacturer: "KeeLoq", protocol: "KeeLoq", frequency: "315/433/868 MHz", modulation: "AM", type: "Dynamic", encoder: true, decoder: true },
+  { manufacturer: "Signal capture", protocol: "RAW", frequency: "315/433/868 MHz", modulation: "AM/FM/RAW", type: "RAW", encoder: true, decoder: true },
+  { manufacturer: "Signal capture", protocol: "BinRAW", frequency: "315/433/868 MHz", modulation: "AM/FM/BinRAW", type: "BinRAW", encoder: true, decoder: true },
 ];
 
 const tabs = [
   { id: "automotive", label: "Automotive", icon: Car, data: automotiveProtocols },
-  { id: "gate", label: "Gate / Access", icon: DoorOpen, data: gateProtocols },
+  { id: "core", label: "Core / Raw", icon: Radio, data: coreProtocols },
 ];
 
 const ProtocolTable = () => {
@@ -59,13 +71,12 @@ const ProtocolTable = () => {
             Supported Protocols
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            Extensive protocol support for automotive and gate/access systems.
+            Active Sub-GHz protocol registry from the firmware source, grouped by use.
           </p>
         </AnimatedSection>
 
         <AnimatedSection delay={0.1}>
           <div className="glass-card overflow-hidden">
-            {/* Tab bar */}
             <div className="flex border-b border-border">
               {tabs.map((tab) => (
                 <button
@@ -83,7 +94,6 @@ const ProtocolTable = () => {
               ))}
             </div>
 
-            {/* Table */}
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -92,6 +102,7 @@ const ProtocolTable = () => {
                     <th className="px-5 py-3 font-medium text-muted-foreground">Protocol</th>
                     <th className="px-5 py-3 font-medium text-muted-foreground hidden sm:table-cell">Frequency</th>
                     <th className="px-5 py-3 font-medium text-muted-foreground hidden md:table-cell">Mod.</th>
+                    <th className="px-5 py-3 font-medium text-muted-foreground hidden lg:table-cell">Type</th>
                     <th className="px-5 py-3 font-medium text-muted-foreground text-center">Enc</th>
                     <th className="px-5 py-3 font-medium text-muted-foreground text-center">Dec</th>
                   </tr>
@@ -116,6 +127,7 @@ const ProtocolTable = () => {
                         <td className="px-5 py-3 text-muted-foreground font-mono text-xs">{p.protocol}</td>
                         <td className="px-5 py-3 text-muted-foreground hidden sm:table-cell">{p.frequency}</td>
                         <td className="px-5 py-3 text-muted-foreground hidden md:table-cell">{p.modulation}</td>
+                        <td className="px-5 py-3 text-muted-foreground hidden lg:table-cell">{p.type}</td>
                         <td className="px-5 py-3 text-center">{p.encoder && <Check className="h-4 w-4 text-primary mx-auto" />}</td>
                         <td className="px-5 py-3 text-center">{p.decoder && <Check className="h-4 w-4 text-primary mx-auto" />}</td>
                       </motion.tr>
